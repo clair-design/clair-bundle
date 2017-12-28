@@ -1,6 +1,6 @@
 {
   "name": "clair-bundle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "rollup for clair",
   "main": "index.js",
   "scripts": {
