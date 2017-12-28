@@ -1,7 +1,8 @@
 options:
-  - input: ./index.js
+  - input: ./lib/index.js
     output:
       - format: cjs
+        name: ClairBundle
         file: ./dist/index.js
     external: !!js/function >
       function (id) {
@@ -9,7 +10,7 @@ options:
       }
     disableCjs: true
 
-  - input: ./cmd.js
+  - input: ./lib/bin.js
     output:
       - format: cjs
         file: ./bin/index
