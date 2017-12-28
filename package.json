@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/clair-design/clair-bundle#readme",
   "dependencies": {
+    "chokidar": "^1.7.0",
     "cssnano": "^3.10.0",
     "execa": "^0.8.0",
     "find-npm-prefix": "^1.0.2",
