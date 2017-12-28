@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/clair-design/clair-bundle.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "wemlion<angusfu1126@qq.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/clair-design/clair-bundle/issues"
   },
