@@ -1,0 +1,19 @@
+options:
+  - input: ./index.js
+    output:
+      - format: cjs
+        file: ./dist/index.js
+    external: !!js/function >
+      function (id) {
+        return /^[a-z][\w-]/i.test(id)
+      }
+
+  - input: ./lib/bin.js
+    output:
+      - format: cjs
+        file: ./bin/index
+        banner: "#!/usr/bin/env node\n"
+    external: !!js/function >
+      function (id) {
+        return /^[a-z][\w-]/i.test(id)
+      }
