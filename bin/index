@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+/**
+ * SEE https://github.com/nodeca/js-yaml
+ */
+const jsYaml = require('js-yaml')
+/**
+ * get current working root directory
+ * SEE https://github.com/npm/find-npm-prefix
+ */
+const findNpmPrefix = require('find-npm-prefix')
+
+const execa = require('execa')
+const { resolve } = require('x-path')
+const { readFile } = require('fs-extra')
+
+const runS = cmds => cmds.reduce(
+  (p, cmd) => p.then(ret => {
+    ret && console.log(ret.stdout)
+    return execa.shell(cmd)
+  }),
+  Promise.resolve()
+)
+
+const bundle = require('../index')
+
+findNpmPrefix(process.cwd())
+  .then(prefix => {
+    process.env.NPM_PREFIX = prefix
+    return resolve(prefix, 'bundle.yml')
+  })
+  .then(file => readFile(file, 'utf-8'))
+  .then(content => {
+    return jsYaml.load(content)
+  })
+  .then(config => {
+    let { before, after } = config.commands
+    after = [].concat(after).filter(Boolean)
+    before = [].concat(before).filter(Boolean)
+
+    console.log('Start bundling...')
+    return runS(before)
+      .then(_ => bundle(config))
+      .then(_ => runS(after))
+  })
+  .then(_ => {
+    console.log('Bundling tasks done.')
+  })
+  .catch(e => console.log(e))

@@ -1,0 +1,40 @@
+{
+  "name": "clair-bundle",
+  "version": "1.0.0",
+  "description": "rollup for clair",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": "./bin/index",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clair-design/clair-bundle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clair-design/clair-bundle/issues"
+  },
+  "homepage": "https://github.com/clair-design/clair-bundle#readme",
+  "dependencies": {
+    "cssnano": "^3.10.0",
+    "execa": "^0.8.0",
+    "find-npm-prefix": "^1.0.2",
+    "fs-extra": "^5.0.0",
+    "js-yaml": "^3.10.0",
+    "rollup": "^0.53.0",
+    "rollup-plugin-alias": "^1.4.0",
+    "rollup-plugin-buble": "^0.18.0",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-glob": "^1.0.1",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-postcss": "^0.5.5",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-svg-vue": "^1.0.2",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-plugin-vue": "^3.0.0",
+    "x-path": "0.0.2"
+  }
+}
