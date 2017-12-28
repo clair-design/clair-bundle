@@ -7,8 +7,9 @@ options:
       function (id) {
         return /^[a-z][\w-]/i.test(id)
       }
+    disableCjs: true
 
-  - input: ./lib/bin.js
+  - input: ./cmd.js
     output:
       - format: cjs
         file: ./bin/index
@@ -17,3 +18,4 @@ options:
       function (id) {
         return /^[a-z][\w-]/i.test(id)
       }
+    disableCjs: true

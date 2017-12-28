@@ -4,7 +4,8 @@
   "description": "rollup for clair",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "node ./bin.js"
+    "clean": "rimraf dist bin",
+    "build": "npm run clean && node ./cmd.js"
   },
   "bin": "./bin/index",
   "repository": {
@@ -37,5 +38,13 @@
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-vue": "^3.0.0",
     "x-path": "0.0.2"
+  },
+  "devDependencies": {
+    "@std/esm": "^0.18.0",
+    "rimraf": "^2.6.2"
+  },
+  "@std/esm": {
+    "cjs": true,
+    "esm": "js"
   }
 }
