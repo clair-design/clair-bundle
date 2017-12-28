@@ -9,6 +9,7 @@ options:
         return /^[a-z][\w-]/i.test(id)
       }
     disableCjs: true
+    disableReplace: true
 
   - input: ./lib/bin.js
     output:
@@ -20,3 +21,4 @@ options:
         return /^[a-z][\w-]/i.test(id)
       }
     disableCjs: true
+    disableReplace: true
