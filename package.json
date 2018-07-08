@@ -1,6 +1,6 @@
 {
-  "name": "clair-bundle",
-  "version": "1.2.0",
+  "name": "emballer",
+  "version": "1.0.0",
   "description": "rollup for clair",
   "main": "./dist/index.js",
   "scripts": {
@@ -10,21 +10,19 @@
   "bin": "./bin/index",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clair-design/clair-bundle.git"
+    "url": "git+https://github.com/clair-design/emballer.git"
   },
   "author": "wemlion<angusfu1126@qq.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/clair-design/clair-bundle/issues"
+    "url": "https://github.com/clair-design/emballer/issues"
   },
-  "homepage": "https://github.com/clair-design/clair-bundle#readme",
+  "homepage": "https://github.com/clair-design/emballer#readme",
   "dependencies": {
     "chokidar": "^1.7.0",
     "cssnano": "^3.10.0",
     "execa": "^0.8.0",
     "find-npm-prefix": "^1.0.2",
-    "fs-extra": "^5.0.0",
-    "js-yaml": "^3.10.0",
     "rollup": "^0.53.0",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-buble": "^0.18.0",
@@ -35,7 +33,6 @@
     "rollup-plugin-postcss": "^0.5.5",
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-require-context": "0.0.2",
-    "rollup-plugin-svg-vue": "^1.0.2",
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-vue": "^3.0.0"
   },
