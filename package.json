@@ -2,13 +2,13 @@
   "name": "emballer",
   "version": "2.0.0",
   "description": "rollup for clair",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "node bin/index build",
-    "test": "node bin/index build -c ./test/emballer.config.js"
+    "build": "bin/index build",
+    "test": "bin/index build -c ./test/emballer.config.js"
   },
-  "bin": "./bin/index",
+  "bin": "bin/index",
   "files": [
     "dist",
     "bin",

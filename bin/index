@@ -1,0 +1,79 @@
+#!/usr/bin/env node
+const { resolve } = require('path')
+const program = require('commander')
+const version = require('../package.json').version
+const emballer = require('../dist')
+
+program.version(version)
+
+program
+  .command('start')
+  .option(
+    '-c --config <path>',
+    'configuration file right under the root of your project',
+    'emballer.config.js'
+  )
+  .description('watch build')
+  .action(bundle)
+
+program
+  .command('build')
+  .option(
+    '-c --config <path>',
+    'configuration file right under the root of your project',
+    'emballer.config.js'
+  )
+  .description('rollup with given configuration')
+  .action(bundle)
+
+program
+  .command('help [command]')
+  .description('display help information for a command')
+  .action(function (command) {
+    let cmd = program.commands.find(c => c.name() === command) || program
+    cmd.help()
+  })
+
+const args = process.argv
+
+if (args[2] === '--help' || args[2] === '-h') args[2] = 'help'
+if (!args[2] || !program.commands.some(c => c.name() === args[2])) {
+  args.splice(2, 0, 'build')
+}
+
+program.parse(args)
+
+function bundle (command) {
+  const name = command.name()
+  const isWatch = name !== 'build'
+
+  const cwd = process.cwd()
+  const prefix = require('execa').shellSync('npm prefix').stdout
+  const config = require(resolve(prefix, command.config))
+  process.env.NPM_PREFIX = prefix
+
+  if (cwd !== prefix) {
+    console.warn(
+      `[emballer] You are NOT running emballer command under ` +
+        `the root of your project, which could cause unexpected results.`
+    )
+  }
+
+  if (isWatch === false) {
+    return emballer(config)
+      .then(() => {
+        console.log('[emballer] done.')
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }
+
+  emballer(config, isWatch)
+    .then(watchers => {
+      console.log('[emballer] watching...')
+    })
+    .catch(e => {
+      console.error(e)
+    })
+}
