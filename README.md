@@ -1,6 +1,6 @@
 # emballer
 
-![Build Status](https://travis-ci.org/clair-design/clair.svg?branch=master)](https://travis-ci.org/clair-design/emballer)
+[![Build Status](https://travis-ci.org/clair-design/clair.svg?branch=master)](https://travis-ci.org/clair-design/emballer)
 
 Rollup bundling system for [clair](https://github.com/clair-design/clair).
 
