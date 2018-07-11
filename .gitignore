@@ -60,3 +60,4 @@ typings/
 
 dist/
 bin/
+test/dist
