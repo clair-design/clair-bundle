@@ -9,6 +9,11 @@
     "test": "node bin/index build -c ./test/emballer.config.js"
   },
   "bin": "./bin/index",
+  "files": [
+    "dist",
+    "bin",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/clair-design/emballer.git"
