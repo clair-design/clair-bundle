@@ -1030,9 +1030,9 @@ elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/elegant-spinner/download/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
 
-emballer@2.0.1:
-  version "2.0.1"
-  resolved "http://registry.npm.taobao.org/emballer/download/emballer-2.0.1.tgz#829730c4294e91176a774b9c6001768e8ab7090e"
+emballer@2.0.2:
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/emballer/download/emballer-2.0.2.tgz#a58d71041ba06d6c6c43d152d5fca274a34b084a"
   dependencies:
     chokidar "^2.0.4"
     commander "^2.16.0"

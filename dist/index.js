@@ -157,7 +157,7 @@ var getInputOption = function bundle (data, ref) {
     return commonjsRequire(resolve(npmPrefix, 'node_modules', id))
   };
 
-  var postcssPlugin = cssNoop;
+  var postCSSPlugin = cssNoop;
 
   // unless explicitly set to `false`
   // PosstCSS would be used
@@ -184,7 +184,7 @@ var getInputOption = function bundle (data, ref) {
       plugins.push(cssnano());
     }
 
-    postcssPlugin = rollupPluginPostcss({
+    postCSSPlugin = rollupPluginPostcss({
       plugins: plugins,
       sourceMap: postcss.sourceMap || sourcemap,
       extract: typeof extract === 'string'
@@ -245,7 +245,7 @@ var getInputOption = function bundle (data, ref) {
       }),
       cjs === false ? {} : rollupPluginCommonjs(cjs || {}),
       replace === false ? {} : rollupPluginReplace(envOption),
-      postcssPlugin,
+      postCSSPlugin,
       rollupPluginVue(objectAssign({ css: false }, vue)),
       json === false ? {} : rollupPluginJson(json || {}),
       rollupPluginBuble(bubleOption),

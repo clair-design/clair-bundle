@@ -35,9 +35,9 @@ const options = [
     // if explicitly set to `false`, PosstCSS would NOT be used.
     // otherwise, `postcss.config.js` in your project would be used.
     // You can also just use an object (which is not as flexible)
-    postcss: false
+    postcss: false,
 
-    // uglify: true
+    uglify: false
   }
 ]
 
