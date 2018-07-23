@@ -73,13 +73,6 @@ var rollupPluginMemory = function memory (config) {
   }
 };
 
-var rollupPluginMemory$1 = /*#__PURE__*/Object.freeze({
-	default: rollupPluginMemory,
-	__moduleExports: rollupPluginMemory
-});
-
-var pluginMemory = ( rollupPluginMemory$1 && rollupPluginMemory ) || rollupPluginMemory$1;
-
 var resolve = path.resolve;
 
 /**
@@ -216,7 +209,7 @@ var getInputOption = function bundle (data, ref) {
 
   if (typeof input === 'object') {
     entry = input;
-    memoryPlugin = pluginMemory();
+    memoryPlugin = rollupPluginMemory();
   } else {
     entry = resolve(npmPrefix, input);
   }
@@ -255,11 +248,6 @@ var getInputOption = function bundle (data, ref) {
   return inputOption
 };
 
-var getInputOption$1 = /*#__PURE__*/Object.freeze({
-	default: getInputOption,
-	__moduleExports: getInputOption
-});
-
 /**
  * get current working root directory
  * SEE https://github.com/npm/find-npm-prefix
@@ -280,15 +268,6 @@ function ensureNpmPrefix () {
 
 var ensureNpmPrefix_1 = ensureNpmPrefix;
 
-var ensureNpmPrefix$1 = /*#__PURE__*/Object.freeze({
-	default: ensureNpmPrefix_1,
-	__moduleExports: ensureNpmPrefix_1
-});
-
-var getInputOption$2 = ( getInputOption$1 && getInputOption ) || getInputOption$1;
-
-var ensureNpmPrefix$2 = ( ensureNpmPrefix$1 && ensureNpmPrefix_1 ) || ensureNpmPrefix$1;
-
 var resolve$1 = path.resolve;
 
 var rollup$1 = rollup.rollup;
@@ -308,7 +287,7 @@ var lib = function (config, isWatch) {
   }
   );
 
-  return ensureNpmPrefix$2().then(function (npmPrefix) { return Promise.all(options.map(function (option) { return fn(option, { npmPrefix: npmPrefix }); })); }
+  return ensureNpmPrefix_1().then(function (npmPrefix) { return Promise.all(options.map(function (option) { return fn(option, { npmPrefix: npmPrefix }); })); }
   )
 };
 
@@ -316,7 +295,7 @@ function bundle (config, ref) {
   var npmPrefix = ref.npmPrefix;
 
   var output = config.output;
-  var inputOption = getInputOption$2(config, { npmPrefix: npmPrefix });
+  var inputOption = getInputOption(config, { npmPrefix: npmPrefix });
   var outputOption = fixOutputOption(output, { npmPrefix: npmPrefix });
 
   return rollup$1(inputOption).then(function (bundle) { return Promise.all(
@@ -330,7 +309,7 @@ function watchCompile (config, ref) {
   var npmPrefix = ref.npmPrefix;
 
   var output = config.output;
-  var inputOption = getInputOption$2(config, { npmPrefix: npmPrefix });
+  var inputOption = getInputOption(config, { npmPrefix: npmPrefix });
   var outputOption = fixOutputOption(output, { npmPrefix: npmPrefix });
   var watchOption = objectAssign$1(
     {

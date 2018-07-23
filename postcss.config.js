@@ -2,6 +2,7 @@ console.log('postcss.config.js touched')
 
 module.exports = {
   plugins: {
-    'postcss-import': {}
+    'postcss-import': {},
+    cssnano: {}
   }
 }

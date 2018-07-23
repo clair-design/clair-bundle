@@ -14,6 +14,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   echo "Releasing $VERSION ..."
 
   # build
+  npm version $VERSION
   VERSION=$VERSION npm run build
 
   # publish
