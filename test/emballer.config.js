@@ -1,9 +1,39 @@
+const common = {
+  input: 'test/index.js',
+  postcss: {
+    extract: true
+  },
+  replace: {
+    'process.env.TEST_ENV': '"test-env"'
+  }
+}
+
 const options = [
   {
-    input: 'test/index.js',
-    output: [{ format: 'umd', name: 'Emballer', file: 'test/dist/index.js' }],
+    ...common,
+    uglify: false,
+    output: [
+      {
+        format: 'umd',
+        name: 'Emballer',
+        file: 'test/dist/index.js',
+        banner: '// banner...'
+      }
+    ]
+  },
+  {
+    ...common,
+    uglify: true,
+    output: [
+      {
+        format: 'umd',
+        name: 'Emballer',
+        file: 'test/dist/index.min.js',
+        banner: '// banner...'
+      }
+    ],
     postcss: {
-      extract: true
+      extract: false
     }
   }
 ]

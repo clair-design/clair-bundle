@@ -75,14 +75,7 @@ var rollupPluginMemory = function memory (config) {
 
 var resolve = path.resolve;
 
-/**
- * for Vue single file components
- */
 
-
-/**
- * for json imports
- */
 
 
 /**
@@ -152,10 +145,13 @@ var getInputOption = function bundle (data, ref) {
 
   var input = data.input;
   var uglify = data.uglify;
+  var cjs = data.cjs;
+  var vue = data.vue;
+  var buble = data.buble;
+  var replace = data.replace;
+  var json = data.json;
   var alias = data.alias; if ( alias === void 0 ) alias = {};
   var external = data.external; if ( external === void 0 ) external = [];
-  var disableCjs = data.disableCjs; if ( disableCjs === void 0 ) disableCjs = false;
-  var disableReplace = data.disableReplace; if ( disableReplace === void 0 ) disableReplace = false;
 
   var requireFromWorkingDir = function (id) {
     return commonjsRequire(resolve(npmPrefix, 'node_modules', id))
@@ -166,7 +162,7 @@ var getInputOption = function bundle (data, ref) {
   // unless explicitly set to `false`
   // PosstCSS would be used
   if (data.postcss !== false) {
-    var postcss = data.postcss || {};
+    var postcss = data.postcss; if ( postcss === void 0 ) postcss = {};
     var extract = postcss.extract;
     var minify = postcss.minify;
     var sourcemap = postcss.sourcemap;
@@ -184,7 +180,7 @@ var getInputOption = function bundle (data, ref) {
       return acc
     }, []);
 
-    if (plugins.lenegth && minify) {
+    if (plugins.length && minify) {
       plugins.push(cssnano());
     }
 
@@ -197,16 +193,37 @@ var getInputOption = function bundle (data, ref) {
     });
   }
 
-  var nodeEnv = JSON.stringify(process.env.NODE_ENV);
-  var vueAlias = resolve(npmPrefix, 'node_modules/vue/dist/vue.esm.js');
+  var aliasOption = objectAssign(
+    {
+      vue: resolve(npmPrefix, 'node_modules/vue/dist/vue.esm.js'),
+      resolve: ['.vue', '.js', '.css']
+    },
+    Object.keys(alias).reduce(function (acc, key) {
+      acc[key] = resolve(npmPrefix, alias[key]);
+      return acc
+    }, {})
+  );
 
-  for (var key in alias) {
-    alias[key] = resolve(npmPrefix, alias[key]);
-  }
+  var bubleOption = objectAssign(
+    {
+      objectAssign: 'Object.assign',
+      jsx: 'h',
+      transforms: {
+        dangerousForOf: true
+      }
+    },
+    buble
+  );
+
+  var envOption = objectAssign(
+    {
+      'undefined': JSON.stringify(undefined)
+    },
+    replace
+  );
 
   var entry = null;
   var memoryPlugin = {};
-
   if (typeof input === 'object') {
     entry = input;
     memoryPlugin = rollupPluginMemory();
@@ -218,29 +235,21 @@ var getInputOption = function bundle (data, ref) {
     input: entry,
     plugins: [
       memoryPlugin,
-      rollupPluginAlias(
-        objectAssign(
-          {
-            resolve: ['.vue', '.js', '.css'],
-            vue: vueAlias
-          },
-          alias
-        )
-      ),
+      rollupPluginAlias(aliasOption),
       rollupPluginRequireContext(),
       rollupPluginNodeResolve({
         jsnext: true,
         main: true,
         browser: true,
-        extensions: ['.js', '.json']
+        extensions: ['.js', '.json', '.jsx', '.vue']
       }),
-      disableCjs ? {} : rollupPluginCommonjs({}),
-      disableReplace ? {} : rollupPluginReplace({ 'process.env.NODE_ENV': nodeEnv }),
+      cjs === false ? {} : rollupPluginCommonjs(cjs || {}),
+      replace === false ? {} : rollupPluginReplace(envOption),
       postcssPlugin,
-      rollupPluginVue({ css: false }),
-      rollupPluginJson(),
-      rollupPluginBuble({ objectAssign: 'Object.assign' }),
-      uglify ? rollupPluginUglify() : {}
+      rollupPluginVue(objectAssign({ css: false }, vue)),
+      json === false ? {} : rollupPluginJson(json || {}),
+      rollupPluginBuble(bubleOption),
+      uglify ? rollupPluginUglify.uglify() : {}
     ],
     external: external
   };
