@@ -235,6 +235,12 @@ var getInputOption = function bundle (data, ref) {
     input: entry,
     plugins: [
       memoryPlugin,
+
+      // orders does matter...
+      rollupPluginVue(objectAssign({ css: false }, vue)),
+      postCSSPlugin,
+      rollupPluginBuble(bubleOption),
+
       rollupPluginAlias(aliasOption),
       rollupPluginRequireContext(),
       rollupPluginNodeResolve({
@@ -245,10 +251,7 @@ var getInputOption = function bundle (data, ref) {
       }),
       cjs === false ? {} : rollupPluginCommonjs(cjs || {}),
       replace === false ? {} : rollupPluginReplace(envOption),
-      postCSSPlugin,
-      rollupPluginVue(objectAssign({ css: false }, vue)),
       json === false ? {} : rollupPluginJson(json || {}),
-      rollupPluginBuble(bubleOption),
       uglify ? rollupPluginUglify.uglify() : {}
     ],
     external: external
