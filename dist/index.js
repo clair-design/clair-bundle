@@ -217,7 +217,7 @@ var getInputOption = function bundle (data, ref) {
 
   var envOption = objectAssign(
     {
-      'undefined': JSON.stringify(undefined)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     },
     replace
   );
@@ -281,6 +281,7 @@ function ensureNpmPrefix () {
 var ensureNpmPrefix_1 = ensureNpmPrefix;
 
 var resolve$1 = path.resolve;
+
 
 var rollup$1 = rollup.rollup;
 var watch = rollup.watch;

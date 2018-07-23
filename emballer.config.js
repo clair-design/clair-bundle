@@ -1,3 +1,4 @@
+// NOTICE: avoid using `require` in your source code
 const options = [
   {
     input: 'lib/index.js',
@@ -19,11 +20,7 @@ const options = [
 
     // rollup-plugin-replace option
     // if false, won't use the plugin
-    replace: {
-      // process.env option
-      // remember to stringify values
-      'process.env.NODE_ENV': JSON.stringify('production')
-    },
+    replace: false,
 
     // rollup-plugin-json option
     // if false, won't use the plugin
