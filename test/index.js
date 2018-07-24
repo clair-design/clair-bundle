@@ -1,4 +1,3 @@
-import './index.css'
 import { add } from './add'
 import { square } from './square'
 import vue from './test.vue'
