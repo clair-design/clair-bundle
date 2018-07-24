@@ -238,7 +238,9 @@ var getInputOption = function bundle (data, ref) {
       memoryPlugin,
 
       // orders does matter...
-      rollupPluginVue(vue || {}),
+      rollupPluginVue(vue || {
+        css: false // NO CSS in .vue
+      }),
       postCSSPlugin,
       rollupPluginBuble(bubleOption),
 

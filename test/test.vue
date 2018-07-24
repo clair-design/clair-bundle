@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import './test.css'
+import './main.css'
 export default {}
 </script>
 
