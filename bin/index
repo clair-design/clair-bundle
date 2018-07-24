@@ -60,6 +60,7 @@ function bundle (command) {
   }
 
   if (isWatch === false) {
+    process.env.NODE_ENV = process.env.NODE_ENV || 'production'
     return emballer(config)
       .then(() => {
         console.log('[emballer] done.')

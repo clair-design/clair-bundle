@@ -210,7 +210,8 @@ var getInputOption = function bundle (data, ref) {
       jsx: 'h',
       transforms: {
         dangerousForOf: true
-      }
+      },
+      exclude: /\.css$/
     },
     buble
   );
@@ -237,7 +238,7 @@ var getInputOption = function bundle (data, ref) {
       memoryPlugin,
 
       // orders does matter...
-      rollupPluginVue(objectAssign({ css: false }, vue)),
+      rollupPluginVue(vue || {}),
       postCSSPlugin,
       rollupPluginBuble(bubleOption),
 
@@ -247,7 +248,7 @@ var getInputOption = function bundle (data, ref) {
         jsnext: true,
         main: true,
         browser: true,
-        extensions: ['.js', '.json', '.jsx', '.vue']
+        extensions: ['.js', '.json', '.jsx']
       }),
       cjs === false ? {} : rollupPluginCommonjs(cjs || {}),
       replace === false ? {} : rollupPluginReplace(envOption),
