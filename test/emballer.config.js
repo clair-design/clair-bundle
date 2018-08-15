@@ -1,8 +1,6 @@
 const common = {
   input: 'test/index.js',
-  postcss: {
-    extract: true
-  },
+  postcss: false,
   replace: {
     'process.env.TEST_ENV': '"test-env"'
   }
@@ -33,7 +31,8 @@ const options = [
       }
     ],
     postcss: {
-      extract: false
+      extract: 'test/dist/minimized.css',
+      minimize: true
     }
   }
 ]

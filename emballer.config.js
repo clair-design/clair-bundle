@@ -1,11 +1,12 @@
 // NOTICE: avoid using `require` in your source code
+const { dependencies } = require('./package.json')
 const options = [
   {
     input: 'lib/index.js',
     output: [{ format: 'cjs', name: 'Emballer', file: 'dist/index.js' }],
 
     external (id) {
-      return /^[a-z][\w-]/i.test(id)
+      return !!dependencies[id]
     },
 
     // rollup-plugin-alias option
@@ -26,13 +27,10 @@ const options = [
     // if false, won't use the plugin
     json: {},
 
-    // buble option (would be merged with default value)
-    buble: {},
-
-    // if explicitly set to `false`, PosstCSS would NOT be used.
-    // otherwise, `postcss.config.js` in your project would be used.
-    // You can also just use an object (which is not as flexible)
-    postcss: false,
+    postcss: {
+      minimize: false,
+      extract: true
+    },
 
     uglify: false
   }
